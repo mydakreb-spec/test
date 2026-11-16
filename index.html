@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portofolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { navy: { 900: '#061426', 800: '#0A1D37', 700: '#10294B' }, electric: '#1D8FE1' },
+  fontFamily: { sans: ['Space Grotesk', 'sans-serif'] } } } };
+</script>
+<style>
+  body { background: #061426; color: #fff; }
+  .ring { background: repeating-radial-gradient(circle, transparent 0 7px, rgba(120,170,230,.45) 7px 8px);
+    -webkit-mask: radial-gradient(circle, #000 55%, transparent 71%); mask: radial-gradient(circle, #000 55%, transparent 71%); }
+  .ring2 { border-radius: 9999px; background: repeating-conic-gradient(rgba(29,143,225,.8) 0 2deg, transparent 2deg 5deg);
+    -webkit-mask: radial-gradient(circle, transparent 60%, #000 61%); mask: radial-gradient(circle, transparent 60%, #000 61%); }
+  .spin { animation: spin .8s linear infinite; } @keyframes spin { to { transform: rotate(360deg); } }
+  .field { width: 100%; background: #061426; border: 1px solid #1c3a63; border-radius: .6rem; padding: .55rem .75rem; color: #fff; }
+  .field:focus { outline: 2px solid #1D8FE1; border-color: transparent; }
+  .lbl { display: block; font-size: .75rem; color: #8fb0d6; margin: .7rem 0 .25rem; }
+  .btn { background: #1D8FE1; border-radius: 9999px; padding: .6rem 1.4rem; font-weight: 700; font-size: .85rem; transition: filter .2s; }
+  .btn:hover { filter: brightness(1.15); }
+  .btn-o { border: 1px solid #1D8FE1; color: #9fd0f7; background: transparent; }
+  .marquee { display: flex; width: max-content; animation: mq 30s linear infinite; }
+  @keyframes mq { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee, .spin { animation: none; } }
+  a:focus-visible, button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- Loading -->
+<div id="loader" class="fixed inset-0 z-[70] hidden items-center justify-center bg-navy-900/80 backdrop-blur-sm">
+  <div class="flex flex-col items-center gap-3">
+    <div class="spin h-12 w-12 rounded-full border-4 border-navy-700 border-t-electric"></div>
+    <p id="loaderMsg" class="text-sm text-slate-300">Memuat…</p>
+  </div>
+</div>
+<div id="toast" class="fixed left-1/2 top-5 z-[80] hidden -translate-x-1/2 rounded-full bg-electric px-5 py-2 text-sm font-medium shadow-xl"></div>
+
+<!-- Navbar -->
+<header class="absolute inset-x-0 top-0 z-30">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-5">
+    <a href="#home" class="flex items-center gap-2 text-lg font-bold">
+      <span id="logoMark" class="flex h-7 w-7 items-center justify-center rounded bg-electric text-sm">P</span>
+      <span id="logoName">Portofolio</span>
+    </a>
+    <div class="hidden gap-8 text-xs font-medium text-slate-300 md:flex">
+      <a href="#home" class="hover:text-white">HOME</a>
+      <a href="#about" class="hover:text-white">ABOUT ME</a>
+      <a href="#projects" class="hover:text-white">PROJECTS</a>
+      <a href="#contact" class="hover:text-white">CONTACT</a>
+    </div>
+    <a id="navCta" href="#contact" class="btn">LET'S TALK</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section id="home" class="relative overflow-hidden bg-gradient-to-b from-navy-900 to-navy-800 pt-28">
+  <div class="mx-auto grid max-w-6xl items-end gap-6 px-5 md:grid-cols-2">
+    <div class="pb-14 md:pb-20">
+      <span id="heroBadge" class="inline-block rounded bg-navy-700 px-3 py-1 text-[11px] tracking-widest text-slate-200"></span>
+      <h1 class="mt-4 text-4xl font-bold uppercase leading-tight md:text-5xl">
+        <span id="heroTitle" class="block"></span>
+        <span id="heroRole" class="block text-electric"></span>
+      </h1>
+      <p id="heroDesc" class="mt-5 max-w-md text-sm leading-relaxed text-slate-300"></p>
+      <div class="mt-7 flex items-center gap-3">
+        <a href="#contact" class="btn">GET IN TOUCH</a>
+        <div id="socials" class="flex gap-2"></div>
+      </div>
+    </div>
+    <div class="relative mx-auto flex w-full max-w-md items-end justify-center">
+      <div class="ring absolute bottom-4 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2"></div>
+      <img id="heroImg" alt="Foto profil" class="relative z-10 max-h-[28rem] w-full object-contain object-bottom">
+    </div>
+  </div>
+</section>
+
+<!-- Bar keahlian -->
+<div class="overflow-hidden border-y border-navy-700 bg-navy-800 py-7">
+  <div id="skills" class="marquee gap-14 text-lg font-bold text-slate-300"></div>
+</div>
+
+<!-- About -->
+<section id="about" class="bg-navy-900 py-20">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-2">
+    <div class="relative mx-auto w-full max-w-sm">
+      <div class="ring2 absolute -bottom-10 -left-10 h-40 w-40"></div>
+      <div class="relative overflow-hidden rounded-3xl border border-navy-700 bg-gradient-to-b from-[#1c3a63] to-navy-800">
+        <img id="aboutImg" alt="Foto about" class="aspect-[4/5] w-full object-cover">
+      </div>
+    </div>
+    <div>
+      <span class="inline-block rounded bg-navy-700 px-3 py-1 text-[11px] tracking-widest text-slate-200">ABOUT ME</span>
+      <h2 id="aboutTitle" class="mt-4 text-3xl font-bold uppercase leading-tight"></h2>
+      <p id="aboutDesc" class="mt-4 max-w-lg whitespace-pre-line text-sm leading-relaxed text-slate-300"></p>
+      <div id="stats" class="mt-7 grid grid-cols-3 gap-3"></div>
+      <a href="#contact" class="btn mt-8 inline-block">GET IN TOUCH</a>
+    </div>
+  </div>
+</section>
+
+<!-- Projek -->
+<section id="projects" class="bg-navy-800 py-20">
+  <div class="mx-auto max-w-6xl px-5">
+    <span class="inline-block rounded bg-navy-700 px-3 py-1 text-[11px] tracking-widest text-slate-200">MY WORK</span>
+    <h2 class="mt-3 text-3xl font-bold uppercase">Recent Project</h2>
+    <div id="filters" class="mt-6 flex flex-wrap gap-2"></div>
+    <div id="grid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact" class="relative bg-navy-900 px-5 py-16 text-center">
+  <h2 class="text-2xl font-bold uppercase">Punya projek? <span class="text-electric">Mari bicara.</span></h2>
+  <a id="contactBtn" class="btn mt-6 inline-block">LET'S TALK</a>
+  <p id="footName" class="mt-10 text-xs text-slate-500"></p>
+  <button id="lockBtn" aria-label="Login admin" class="absolute bottom-3 right-3 p-2 opacity-20 transition hover:opacity-70">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+  </button>
+</footer>
+
+<!-- Admin bar -->
+<div id="adminBar" class="fixed bottom-4 left-1/2 z-40 hidden -translate-x-1/2 items-center gap-2 rounded-full border border-electric bg-navy-800/95 px-4 py-2 shadow-2xl backdrop-blur">
+  <span class="mr-1 text-xs font-bold text-electric">ADMIN</span>
+  <button id="aProfil" class="btn btn-o !py-1.5 !text-xs">Edit Profil</button>
+  <button id="aAdd" class="btn !py-1.5 !text-xs">+ Projek</button>
+  <button id="aOut" class="btn btn-o !py-1.5 !text-xs">Logout</button>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="fixed inset-0 z-[60] hidden items-start justify-center overflow-y-auto bg-black/70 p-4 backdrop-blur-sm">
+  <div id="modalBody" class="relative my-8 w-full max-w-2xl rounded-2xl border border-navy-700 bg-navy-800 p-6"></div>
+</div>
+
+<script>
+const API_URL = "TEMPEL_URL_EXEC_DISINI";
+
+/* ================= KONFIGURASI ================= */
+const CONTACT_URL = 'mailto:email@contoh.com';
+const SOCIALS = [{ t: 'IG', u: '#' }, { t: 'IN', u: '#' }, { t: 'GH', u: '#' }];
+const SKILLS = ['UI Design', 'UX Research', 'Web Design', 'Prototyping', 'Branding', 'Ilustrasi'];
+const PROFIL_FIELDS = [
+  ['Nama_Lengkap', 'Nama lengkap'], ['Profesi', 'Profesi'], ['Deskripsi_Hero', 'Deskripsi hero', 'ta'],
+  ['Judul_About', 'Judul about'], ['Deskripsi_About', 'Deskripsi about', 'ta'],
+  ['Stat_1_Angka', 'Statistik 1 — angka'], ['Stat_1_Label', 'Statistik 1 — label'],
+  ['Stat_2_Angka', 'Statistik 2 — angka'], ['Stat_2_Label', 'Statistik 2 — label'],
+  ['Stat_3_Angka', 'Statistik 3 — angka'], ['Stat_3_Label', 'Statistik 3 — label']];
+
+/* ================= UTIL ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const safeUrl = u => /^(https?:\/\/|mailto:)/i.test(String(u || '').trim()) ? String(u).trim() : '';
+const state = { profil: {}, projek: [], cat: 'Semua', token: localStorage.getItem('tokenSesi') || '' };
+
+function loading(on, msg) {
+  $('#loaderMsg').textContent = msg || 'Memuat…';
+  $('#loader').classList.toggle('hidden', !on);
+  $('#loader').classList.toggle('flex', on);
+}
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.classList.remove('hidden');
+  clearTimeout(toast.id); toast.id = setTimeout(() => t.classList.add('hidden'), 2800);
+}
+function openModal(html) {
+  $('#modalBody').innerHTML = '<button id="mClose" aria-label="Tutup" class="absolute right-4 top-3 text-2xl text-slate-400 hover:text-white">&times;</button>' + html;
+  $('#modal').classList.remove('hidden'); $('#modal').classList.add('flex');
+  $('#mClose').onclick = closeModal;
+}
+function closeModal() { $('#modal').classList.add('hidden'); $('#modal').classList.remove('flex'); $('#modalBody').innerHTML = ''; }
+$('#modal').addEventListener('mousedown', e => { if (e.target.id === 'modal') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+async function apiGet() {
+  const r = await fetch(API_URL); return r.json();
+}
+async function apiPost(payload) {
+  const r = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+  const j = await r.json();
+  if (j.auth === false) logout(true);
+  return j;
+}
+function fileToB64(f) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => {
+      const i = new Image();
+      i.onload = () => {
+        const k = Math.min(1, 1600 / Math.max(i.width, i.height));
+        const c = document.createElement('canvas'); c.width = Math.round(i.width * k); c.height = Math.round(i.height * k);
+        const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(i, 0, 0, c.width, c.height);
+        res({ name: f.name, mime: 'image/jpeg', data: c.toDataURL('image/jpeg', .85).split(',')[1] });
+      };
+      i.onerror = rej; i.src = r.result;
+    };
+    r.onerror = rej; r.readAsDataURL(f);
+  });
+}
+function embedUrl(u) {
+  u = String(u || ''); if (!u) return '';
+  let m = u.match(/(?:youtu\.be\/|[?&]v=|embed\/)([\w-]{11})/);
+  if (m) return 'https://www.youtube.com/embed/' + m[1];
+  if (/drive\.google\.com/.test(u)) {
+    m = u.match(/\/d\/([\w-]+)/) || u.match(/[?&]id=([\w-]+)/);
+    if (m) return 'https://drive.google.com/file/d/' + m[1] + '/preview';
+  }
+  return '';
+}
+const PLACEHOLDER = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="#10294B"/><text x="50%" y="50%" fill="#4d7bb0" font-family="sans-serif" font-size="22" text-anchor="middle">Belum ada foto</text></svg>');
+
+/* ================= RENDER ================= */
+function renderProfil() {
+  const p = state.profil, nama = p.Nama_Lengkap || 'Nama Anda', depan = nama.split(' ')[0];
+  document.title = nama + ' — Portofolio';
+  $('#logoName').textContent = depan;
+  $('#logoMark').textContent = nama.charAt(0).toUpperCase();
+  $('#heroBadge').textContent = depan.toUpperCase();
+  $('#heroTitle').textContent = 'Halo! Saya ' + depan + '.';
+  $('#heroRole').textContent = 'Saya ' + (p.Profesi || '');
+  $('#heroDesc').textContent = p.Deskripsi_Hero || '';
+  $('#heroImg').src = safeUrl(p.Foto_Hero_URL) || PLACEHOLDER;
+  $('#aboutImg').src = safeUrl(p.Foto_About_URL) || PLACEHOLDER;
+  $('#aboutTitle').textContent = p.Judul_About || '';
+  $('#aboutDesc').textContent = p.Deskripsi_About || '';
+  $('#footName').textContent = '© ' + new Date().getFullYear() + ' ' + nama;
+  $('#stats').innerHTML = [1, 2, 3].map(n => `<div class="rounded-lg border border-navy-700 bg-navy-800 p-3">
+    <div class="text-2xl font-bold">${esc(p['Stat_' + n + '_Angka'])}</div>
+    <div class="mt-1 text-[11px] text-slate-400">${esc(p['Stat_' + n + '_Label'])}</div></div>`).join('');
+  $('#socials').innerHTML = SOCIALS.map(s => `<a href="${esc(s.u)}" target="_blank" rel="noopener" class="flex h-8 w-8 items-center justify-center rounded-full bg-electric text-[10px] font-bold">${esc(s.t)}</a>`).join('');
+  $('#skills').innerHTML = [...SKILLS, ...SKILLS].map(s => `<span class="whitespace-nowrap px-6">${esc(s)}</span>`).join('');
+  const c = safeUrl(CONTACT_URL) || '#contact'; $('#contactBtn').href = c; $('#navCta').href = c;
+}
+function renderProjek() {
+  const cats = ['Semua', ...new Set(state.projek.map(p => p.Kategori).filter(Boolean))];
+  $('#filters').innerHTML = cats.map(c => `<button data-c="${esc(c)}" class="rounded-full border px-4 py-1.5 text-xs font-medium ${c === state.cat ? 'border-electric bg-electric' : 'border-navy-700 text-slate-300 hover:border-electric'}">${esc(c)}</button>`).join('');
+  $('#filters').querySelectorAll('button').forEach(b => b.onclick = () => { state.cat = b.dataset.c; renderProjek(); });
+  const list = state.projek.filter(p => state.cat === 'Semua' || p.Kategori === state.cat);
+  if (!list.length) { $('#grid').innerHTML = '<p class="col-span-full text-sm text-slate-400">Belum ada projek di kategori ini.</p>'; return; }
+  const admin = !!state.token;
+  $('#grid').innerHTML = list.map(p => `<article class="relative overflow-hidden rounded-xl bg-white text-slate-900 shadow-lg">
+    <img src="${esc(safeUrl(p.Foto_Utama_URL) || PLACEHOLDER)}" alt="${esc(p.Judul_Projek)}" loading="lazy" class="aspect-[4/3] w-full object-cover">
+    <div class="flex items-end justify-between gap-3 p-4">
+      <div class="min-w-0"><h3 class="truncate text-sm font-bold">${esc(p.Judul_Projek)}</h3><p class="mt-0.5 truncate text-xs text-slate-500">${esc(p.Kategori)}</p></div>
+      <button data-open="${esc(p.ID_Projek)}" aria-label="Buka detail ${esc(p.Judul_Projek)}" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-electric text-white transition hover:brightness-110">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+    ${admin ? `<div class="absolute right-2 top-2 flex gap-1">
+      <button data-edit="${esc(p.ID_Projek)}" class="rounded bg-navy-900/90 px-2 py-1 text-[11px] text-white">Edit</button>
+      <button data-del="${esc(p.ID_Projek)}" class="rounded bg-red-600 px-2 py-1 text-[11px] text-white">Hapus</button></div>` : ''}
+  </article>`).join('');
+  $('#grid').querySelectorAll('[data-open]').forEach(b => b.onclick = () => showDetail(b.dataset.open));
+  $('#grid').querySelectorAll('[data-edit]').forEach(b => b.onclick = () => projekForm(b.dataset.edit));
+  $('#grid').querySelectorAll('[data-del]').forEach(b => b.onclick = () => delProjek(b.dataset.del));
+}
+function findP(id) { return state.projek.find(p => String(p.ID_Projek) === String(id)); }
+
+function showDetail(id) {
+  const p = findP(id); if (!p) return;
+  const emb = embedUrl(p.Video_URL), link = safeUrl(p.Link_Pendukung);
+  openModal(`<h3 class="pr-8 text-2xl font-bold">${esc(p.Judul_Projek)}</h3>
+    <p class="mt-1 text-xs text-electric">${esc(p.Kategori)}${p.Tanggal ? ' — ' + esc(p.Tanggal) : ''}</p>
+    ${emb ? `<div class="mt-4 aspect-video overflow-hidden rounded-xl"><iframe src="${esc(emb)}" class="h-full w-full" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`
+      : `<img src="${esc(safeUrl(p.Foto_Utama_URL) || PLACEHOLDER)}" alt="${esc(p.Judul_Projek)}" class="mt-4 w-full rounded-xl">`}
+    ${emb && safeUrl(p.Foto_Utama_URL) ? `<img src="${esc(p.Foto_Utama_URL)}" alt="" class="mt-3 w-full rounded-xl">` : ''}
+    <p class="mt-4 whitespace-pre-line text-sm leading-relaxed text-slate-300">${esc(p.Deskripsi)}</p>
+    ${link ? `<a href="${esc(link)}" target="_blank" rel="noopener" class="btn mt-5 inline-block">${esc(p.Label_Link || 'Buka tautan')}</a>` : ''}`);
+}
+
+/* ================= DATA ================= */
+async function load() {
+  loading(true, 'Mengambil data…');
+  try {
+    const j = await apiGet();
+    if (!j.ok) throw new Error(j.error);
+    state.profil = j.profil || {}; state.projek = j.projek || [];
+  } catch (e) { toast('Gagal memuat data: ' + e.message); }
+  renderProfil(); renderProjek(); syncAdmin(); loading(false);
+}
+
+/* ================= ADMIN ================= */
+function syncAdmin() {
+  $('#adminBar').classList.toggle('hidden', !state.token);
+  $('#adminBar').classList.toggle('flex', !!state.token);
+  renderProjek();
+}
+function logout(expired) {
+  state.token = ''; localStorage.removeItem('tokenSesi'); syncAdmin();
+  toast(expired ? 'Sesi berakhir. Silakan login ulang.' : 'Anda sudah logout.');
+}
+$('#aOut').onclick = () => logout(false);
+$('#lockBtn').onclick = () => {
+  if (state.token) { toast('Mode admin sudah aktif.'); return; }
+  openModal(`<h3 class="text-xl font-bold">Login Admin</h3>
+    <form id="fLogin"><label class="lbl">Username</label><input name="u" class="field" required autocomplete="username">
+    <label class="lbl">Password</label><input name="p" type="password" class="field" required autocomplete="current-password">
+    <button class="btn mt-5 w-full">Masuk</button></form>`);
+  $('#fLogin').onsubmit = async e => {
+    e.preventDefault(); const f = e.target; loading(true, 'Memeriksa akun…');
+    try {
+      const j = await apiPost({ action: 'login', username: f.u.value, password: f.p.value });
+      if (!j.ok) throw new Error(j.error);
+      state.token = j.token; localStorage.setItem('tokenSesi', j.token);
+      closeModal(); syncAdmin(); toast('Login berhasil.');
+    } catch (err) { toast(err.message); }
+    loading(false);
+  };
+};
+
+const imgField = (name, label, cur) => `<label class="lbl">${label}</label>
+  <div class="flex items-center gap-3"><img src="${esc(safeUrl(cur) || PLACEHOLDER)}" alt="" class="h-14 w-14 rounded-lg object-cover">
+  <input type="file" name="${name}" accept="image/*" class="text-xs text-slate-300 file:mr-3 file:rounded-full file:border-0 file:bg-electric file:px-3 file:py-1.5 file:text-white"></div>`;
+
+$('#aProfil').onclick = () => {
+  const p = state.profil;
+  openModal(`<h3 class="text-xl font-bold">Edit Profil</h3><form id="fProfil">
+    ${PROFIL_FIELDS.map(([k, l, t]) => `<label class="lbl">${l}</label>` + (t ? `<textarea name="${k}" rows="3" class="field">${esc(p[k])}</textarea>` : `<input name="${k}" value="${esc(p[k])}" class="field">`)).join('')}
+    ${imgField('Foto_Hero_URL', 'Foto hero (unggah untuk mengganti)', p.Foto_Hero_URL)}
+    ${imgField('Foto_About_URL', 'Foto about (unggah untuk mengganti)', p.Foto_About_URL)}
+    <button class="btn mt-6 w-full">Simpan profil</button></form>`);
+  $('#fProfil').onsubmit = async e => {
+    e.preventDefault(); const f = e.target; loading(true, 'Mengunggah & menyimpan profil…');
+    try {
+      const fields = {}, files = {};
+      PROFIL_FIELDS.forEach(([k]) => fields[k] = f[k].value);
+      for (const k of ['Foto_Hero_URL', 'Foto_About_URL']) if (f[k].files[0]) files[k] = await fileToB64(f[k].files[0]);
+      const j = await apiPost({ action: 'updateProfil', token: state.token, fields, files });
+      if (!j.ok) throw new Error(j.error);
+      closeModal(); toast('Profil tersimpan.'); await load();
+    } catch (err) { toast(err.message); loading(false); }
+  };
+};
+
+function projekForm(id) {
+  const p = id ? findP(id) : {}; if (id && !p) return;
+  openModal(`<h3 class="text-xl font-bold">${id ? 'Edit projek' : 'Tambah projek'}</h3><form id="fProjek">
+    <label class="lbl">Judul projek</label><input name="Judul_Projek" value="${esc(p.Judul_Projek)}" class="field" required>
+    <div class="grid grid-cols-2 gap-3"><div><label class="lbl">Kategori</label><input name="Kategori" value="${esc(p.Kategori)}" class="field" placeholder="Website Design"></div>
+    <div><label class="lbl">Tanggal</label><input name="Tanggal" type="date" value="${esc(p.Tanggal || new Date().toISOString().slice(0, 10))}" class="field"></div></div>
+    <label class="lbl">Deskripsi lengkap</label><textarea name="Deskripsi" rows="5" class="field">${esc(p.Deskripsi)}</textarea>
+    ${imgField('foto', 'Foto utama (unggah untuk mengganti)', p.Foto_Utama_URL)}
+    <label class="lbl">Link video (YouTube / Google Drive, opsional)</label><input name="Video_URL" value="${esc(p.Video_URL)}" class="field">
+    <div class="grid grid-cols-2 gap-3"><div><label class="lbl">Link pendukung</label><input name="Link_Pendukung" value="${esc(p.Link_Pendukung)}" class="field" placeholder="https://"></div>
+    <div><label class="lbl">Label tombol link</label><input name="Label_Link" value="${esc(p.Label_Link)}" class="field"></div></div>
+    <button class="btn mt-6 w-full">Simpan projek</button></form>`);
+  $('#fProjek').onsubmit = async e => {
+    e.preventDefault(); const f = e.target; loading(true, 'Mengunggah & menyimpan projek…');
+    try {
+      const fields = { ID_Projek: id || '' };
+      ['Judul_Projek', 'Kategori', 'Tanggal', 'Deskripsi', 'Video_URL', 'Link_Pendukung', 'Label_Link'].forEach(k => fields[k] = f[k].value);
+      const file = f.foto.files[0] ? await fileToB64(f.foto.files[0]) : null;
+      const j = await apiPost({ action: 'saveProjek', token: state.token, fields, file });
+      if (!j.ok) throw new Error(j.error);
+      closeModal(); toast('Projek tersimpan.'); await load();
+    } catch (err) { toast(err.message); loading(false); }
+  };
+}
+$('#aAdd').onclick = () => projekForm();
+
+async function delProjek(id) {
+  const p = findP(id);
+  if (!p || !confirm('Hapus projek "' + p.Judul_Projek + '"? Tindakan ini tidak bisa dibatalkan.')) return;
+  loading(true, 'Menghapus projek…');
+  try {
+    const j = await apiPost({ action: 'deleteProjek', token: state.token, id });
+    if (!j.ok) throw new Error(j.error);
+    toast('Projek dihapus.'); await load();
+  } catch (err) { toast(err.message); loading(false); }
+}
+
+load();
+</script>
+</body>
+</html>
